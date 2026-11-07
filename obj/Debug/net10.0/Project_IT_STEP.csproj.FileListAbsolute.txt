@@ -1,0 +1,15 @@
+/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP
+/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.deps.json
+/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.runtimeconfig.json
+/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.dll
+/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.pdb
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.GeneratedMSBuildEditorConfig.editorconfig
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.AssemblyInfoInputs.cache
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.AssemblyInfo.cs
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.csproj.CoreCompileInputs.cache
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.sourcelink.json
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.dll
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/refint/Project_IT_STEP.dll
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.pdb
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.genruntimeconfig.cache
+/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/ref/Project_IT_STEP.dll
