@@ -1,0 +1,9 @@
+[
+  {
+    "Id": 1,
+    "Name": "Main",
+    "LastName": "Moderator",
+    "Email": "mod@it.com",
+    "PasswordHash": "ED7CE2543FEEEE8020F50A7F3415D1C4880C4BE39CE0774D59C7DA160607EB99"
+  }
+]
