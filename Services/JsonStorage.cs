@@ -2,21 +2,30 @@ using System.Text.Json;
 
 namespace Project_IT_STEP.Services;
 
-public class JsonStorage<T>
+internal class JsonStorage<T>
 {
     private static readonly JsonSerializerOptions Options = new() { WriteIndented = true };
-    private readonly string Path;
+    private readonly string FilePath;
 
-    public JsonStorage(string path)
+    public JsonStorage(string fileName)
     {
-        Path = path;
+        var folder = System.IO.Path.Combine(AppContext.BaseDirectory, "Data");
+        Directory.CreateDirectory(folder);
+        FilePath = System.IO.Path.Combine(folder, fileName);
     }
 
-    public List<T> Load() =>
-        File.Exists(Path)
-            ? JsonSerializer.Deserialize<List<T>>(File.ReadAllText(Path)) ?? []
-            : [];
+    public List<T> Load()
+    {
+        if (!File.Exists(FilePath))
+            return [];
 
-    public void Save(List<T> items) =>
-        File.WriteAllText(Path, JsonSerializer.Serialize(items, Options));
+        using var stream = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
+        return JsonSerializer.Deserialize<List<T>>(stream) ?? [];
+    }
+
+    public void Save(List<T> items)
+    {
+        using var stream = new FileStream(FilePath, FileMode.Create, FileAccess.Write);
+        JsonSerializer.Serialize(stream, items, Options);
+    }
 }
