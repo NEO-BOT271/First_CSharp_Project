@@ -32,7 +32,7 @@ internal abstract class RoleMenu<T>(IAuthService auth, RoleSystem role, string t
 
     private void LogIn()
     {
-        if (Auth.LogIn(UI.Ask("Email:"), UI.Ask("Password:"), role) is not T person)
+        if (Auth.LogIn(UI.Ask("Email:"), UI.AskPassword("Password:"), role) is not T person)
         {
             UI.Error("Wrong email or password.");
             return;

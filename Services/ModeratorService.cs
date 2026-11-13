@@ -10,7 +10,7 @@ public class ModeratorService : IModeratorService
     private readonly JsonStorage<Admin> Admins = new("admins.json");
     private readonly JsonStorage<AdminApplication> Applications = new("applications.json");
     private readonly EmailRegistry Emails = new();
-
+    private readonly IEmailService Email = new EmailService();
     public bool HireAdmin(CreatingAccountRequest request)
     {
         if (!request.IsValid() || Emails.Exists(request.Email))
@@ -37,9 +37,7 @@ public class ModeratorService : IModeratorService
     public bool SubmitApplication(CreatingAccountRequest request)
     {
         if (!request.IsValid() || Emails.Exists(request.Email))
-        {
             return false;
-        }
 
         var applications = Applications.Load();
         if (applications.Any(a => a.Status == ApplicationStatus.Pending
@@ -55,6 +53,9 @@ public class ModeratorService : IModeratorService
             PasswordHash = PasswordHasher.Hash(request.Password)
         });
         Applications.Save(applications);
+
+        Email.SendToModerators("New admin application",
+            EmailTemplates.ApplicationReceived(request.Name, request.LastName, request.Email));
         return true;
     }
 

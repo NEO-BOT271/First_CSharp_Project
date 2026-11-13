@@ -1,3 +1,4 @@
+using System.Text;
 using Project_IT_STEP.Models;
 using Project_IT_STEP.Services;
 
@@ -6,8 +7,8 @@ namespace Project_IT_STEP;
 internal static class UI
 {
     public static void Title(string text) => Write(text, ConsoleColor.Cyan);
-    public static void Option(string text) => Write(text, ConsoleColor.Magenta);
-    public static void Info(string text) => Write(text, ConsoleColor.Gray);
+    public static void Option(string text) => Write(text, ConsoleColor.Gray);
+    public static void Info(string text) => Write(text, ConsoleColor.DarkGray);
     public static void Success(string text) => Write(text, ConsoleColor.Green);
     public static void Error(string text) => Write(text, ConsoleColor.Red);
 
@@ -24,7 +25,7 @@ internal static class UI
 
     public static void ShowMenu(string title, params string[] options)
     {
-        Console.WriteLine();
+        Console.Clear();
         Title(title);
         for (var i = 0; i < options.Length; i++)
         {
@@ -52,7 +53,7 @@ internal static class UI
             Name = Ask("Name:"),
             LastName = Ask("Last name:"),
             Email = Ask("Email:"),
-            Password = Ask("Password:")
+            Password = AskPassword("Password:")
         };
     }
 
@@ -84,5 +85,32 @@ internal static class UI
         Console.ForegroundColor = color;
         Console.WriteLine(text);
         Console.ResetColor();
+    }
+    public static string AskPassword(string question)
+    {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.Write(question + " ");
+        Console.ResetColor();
+
+        var password = new StringBuilder();
+        while (true)
+        {
+            var key = Console.ReadKey(intercept: true);
+            if (key.Key == ConsoleKey.Enter)
+                break;
+            if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+            {
+                password.Length--;
+                Console.Write("\b \b");
+            }
+            else if (!char.IsControl(key.KeyChar))
+            {
+                password.Append(key.KeyChar);
+                Console.Write('*');
+            }
+        }
+
+        Console.WriteLine();
+        return password.ToString();
     }
 }

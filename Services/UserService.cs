@@ -4,11 +4,12 @@ using Project_IT_STEP.Models;
 using Project_IT_STEP.Services;
 
 
-namespace workingproject.Services;
+namespace Project_IT_STEP.Services;
 
 internal class UserService : IUserService
 {
     private readonly JsonStorage<UserRequest> Storage = new("requests.json");
+    private readonly IEmailService Email = new EmailService();
 
     public UserRequest SubmitRequest(int userId, UserRequest request)
     {
@@ -18,7 +19,12 @@ internal class UserService : IUserService
         request.Status = UserRequestStatus.Pending;
         requests.Add(request);
         Storage.Save(requests);
-        return request;
+
+        var subject = $"New request #{request.Id}";
+        var html = EmailTemplates.RequestReceived(request.Id, userId, QuestionsService.All[request.Category].Title);
+        Email.SendToModerators(subject, html);
+        Email.SendToAdmins(subject, html);
+        return request; 
     }
 
     public List<UserRequest> GetMyRequests(int userId) =>

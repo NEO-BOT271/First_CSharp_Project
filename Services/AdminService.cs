@@ -7,7 +7,7 @@ namespace Project_IT_STEP.Services;
 internal class AdminService : IAdminService
 {
     private readonly JsonStorage<UserRequest> Storage = new("requests.json");
-
+    private readonly IEmailService Email = new EmailService();
     public List<UserRequest> GetPendingRequests() =>
         Storage.Load()
             .Where(r => r.Status == UserRequestStatus.Pending)
@@ -34,6 +34,11 @@ internal class AdminService : IAdminService
         request.TechnicianNotes = notes;
         request.Status = UserRequestStatus.Priced;
         Storage.Save(requests);
+
+        Email.SendToUser(request.UserId,
+            $"Your request #{request.Id} has been priced",
+            EmailTemplates.QuotePriced(request.Id, price, notes));
+        return true;
         return true;
     }
 }
