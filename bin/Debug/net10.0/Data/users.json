@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "Role": 0,
+    "Id": 1,
+    "Name": "Kira",
+    "LastName": "khulelidze",
+    "Email": "khulelidzeliza@gmail.com",
+    "PasswordHash": "C1D33A9EC41EBF3C5B0275203AC071D85C9E2625B03064FB68780C864D2282C3"
+  }
+]

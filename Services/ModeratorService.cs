@@ -81,6 +81,10 @@ public class ModeratorService : IModeratorService
 
         application.Status = approve ? ApplicationStatus.Approved : ApplicationStatus.Rejected;
         Applications.Save(applications);
+
+        if (approve)
+            Email.Send(application.Email, "Your admin application was approved",
+                EmailTemplates.AdminApproved(application.Name));
         return true;
     }
 

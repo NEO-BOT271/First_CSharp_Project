@@ -45,5 +45,9 @@ internal static class EmailTemplates
             $"<p>Estimated price: <b>${price}</b></p>" +
             $"<p>Technician notes: {Enc(notes)}</p>" +
             "<p>Log in as user to accept the quote.</p>");
+    public static string AdminApproved(string name) =>
+        Fill("Your admin application was approved",
+            $"<p>Hello {Enc(name)},</p>" +
+            "<p>Your admin application has been approved. You can now log in as admin.</p>");
     private static string Enc(string text) => WebUtility.HtmlEncode(text);
 }

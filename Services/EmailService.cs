@@ -42,6 +42,8 @@ internal class EmailService : IEmailService
         return allSent;
     }
     
+    
+    
     public bool SendToModerators(string subject, string htmlBody)
     {
         var allSent = true;
@@ -54,7 +56,7 @@ internal class EmailService : IEmailService
         var user = Users.Load().FirstOrDefault(u => u.Id == userId);
         return user is not null && Send(user.Email, subject, htmlBody);
     }
-
+    
     private static EmailSettings LoadSettings()
     {
         var path = System.IO.Path.Combine(AppContext.BaseDirectory, "Data", "emailsettings.json");
