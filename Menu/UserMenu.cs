@@ -22,8 +22,8 @@ internal class UserMenu(IAuthService auth, IUserService users)
 
             switch (UI.Ask("Choose:"))
             {
-                case "1": SubmitRequest(user); break;
-                case "2": UI.ShowRequests(users.GetMyRequests(user.Id)); break;
+                case "1": SubmitRequest(user); UI.Pause(); break;
+                case "2": UI.ShowRequests(users.GetMyRequests(user.Id)); UI.Pause(); break;
                 case "3": UI.Report(users.AcceptQuote(UI.AskNumber("Request id to accept:"), user.Id),
                     "Quote accepted.", "No priced request with that id."); break;
                 case "4": return;

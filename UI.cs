@@ -9,9 +9,27 @@ internal static class UI
     public static void Title(string text) => Write(text, ConsoleColor.Cyan);
     public static void Option(string text) => Write(text, ConsoleColor.Gray);
     public static void Info(string text) => Write(text, ConsoleColor.DarkGray);
-    public static void Success(string text) => Write(text, ConsoleColor.Green);
-    public static void Error(string text) => Write(text, ConsoleColor.Red);
+    public static void Success(string text) => Notify(text, ConsoleColor.Green);
+    public static void Error(string text) => Notify(text, ConsoleColor.Red);
 
+    
+    private static string? PendingMessage;
+    private static ConsoleColor PendingColor;
+
+    public static void Pause()
+    {
+        Console.WriteLine();
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write("Press Enter to return to the menu...");
+        Console.ResetColor();
+        Console.ReadLine();
+    }
+    
+    public static void Notify(string text, ConsoleColor color)
+    {
+        PendingMessage = text;
+        PendingColor = color;
+    }
     public static string Ask(string question)
     {
         Console.ForegroundColor = ConsoleColor.Yellow;
@@ -26,6 +44,13 @@ internal static class UI
     public static void ShowMenu(string title, params string[] options)
     {
         Console.Clear();
+        if (PendingMessage is not null)
+        {
+            Console.ForegroundColor = PendingColor;
+            Console.WriteLine(PendingMessage);
+            Console.ResetColor();
+            PendingMessage = null;
+        }
         Title(title);
         for (var i = 0; i < options.Length; i++)
         {
@@ -47,14 +72,16 @@ internal static class UI
 
     public static CreatingAccountRequest ReadAccountRequest()
     {
-        Info("Password must be 8 to 15 characters.");
-        return new CreatingAccountRequest
+        var request = new CreatingAccountRequest
         {
             Name = Ask("Name:"),
             LastName = Ask("Last name:"),
-            Email = Ask("Email:"),
-            Password = AskPassword("Password:")
+            Email = Ask("Email:")
         };
+
+        Info("Password must be 8 to 15 characters.");
+        request.Password = AskPassword("Password:");
+        return request;
     }
 
     public static void ShowRequests(List<UserRequest> requests)

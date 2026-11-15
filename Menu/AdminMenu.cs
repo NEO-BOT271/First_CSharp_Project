@@ -20,8 +20,8 @@ internal class AdminMenu(IAuthService auth, IAdminService admins, IModeratorServ
 
             switch (UI.Ask("Choose:"))
             {
-                case "1": UI.ShowRequests(admins.GetPendingRequests()); break;
-                case "2": PriceRequest(); break;
+                case "1": UI.ShowRequests(admins.GetPendingRequests()); UI.Pause(); break;
+                case "2": PriceRequest(); UI.Pause(); break;
                 case "3": return;
                 default: UI.Error("Invalid choice."); break;
             }

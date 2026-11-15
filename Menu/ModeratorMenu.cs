@@ -1,7 +1,6 @@
 using Project_IT_STEP.ENUM;
 using Project_IT_STEP.Interfaces;
 using Project_IT_STEP.Models;
-
 namespace Project_IT_STEP.Menu;
 
 internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
@@ -22,12 +21,12 @@ internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
                 case "1": UI.Report(moderators.HireAdmin(UI.ReadAccountRequest()),
                     "Admin hired.", "Invalid details or email already in use."); break;
                 case "2": UI.ShowList(moderators.GetAdmins(),
-                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); break;
+                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
                 case "3": UI.Report(moderators.RemoveAdmin(UI.AskNumber("Admin id:")),
                     "Admin removed.", "No admin with that id."); break;
                 case "4": UI.ShowList(moderators.GetPendingApplications(),
-                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); break;
-                case "5": ReviewApplication(); break;
+                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
+                case "5": ReviewApplication(); UI.Pause(); break;
                 case "6": return;
                 default: UI.Error("Invalid choice."); break;
             }
