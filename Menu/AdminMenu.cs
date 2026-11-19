@@ -1,39 +1,54 @@
 using Project_IT_STEP.ENUM;
 using Project_IT_STEP.Interfaces;
 using Project_IT_STEP.Models;
+using Project_IT_STEP.Services;
 
 namespace Project_IT_STEP.Menu;
 
 internal class AdminMenu(IAuthService auth, IAdminService admins, IModeratorService moderators)
-    : RoleMenu<Admin>(auth, RoleSystem.Admin, "Admin Menu")
+    : RoleMenu<Admin>(auth, RoleSystem.Admin, Texts.AdminMenu)
 {
-    protected override void SignUp() =>
-        UI.Report(moderators.SubmitApplication(UI.ReadAccountRequest()),
-            "Application sent. A moderator will review it.",
-            "Invalid details, email already in use, or application already pending.");
+  
+    protected override void SignUp()
+    {
+        var request = UI.ReadAccountRequest();
+        var (worksAt, certificate, experience) = UI.ReadAdminQuestions();
+        UI.Report(moderators.SubmitApplication(request, worksAt, certificate, experience),
+            Texts.ApplicationSent,
+            Texts.InvalidDetailsAdmin);
+    }
 
     protected override void Open(Admin admin)
     {
         while (true)
         {
-            UI.ShowMenu($"=== Admin: {admin.Name} ===", "Pending requests", "Price a request", "Log out");
+            UI.ShowMenu([Texts.AppName, Texts.Admin, admin.Name],
+                Texts.PendingRequests,
+                Texts.PriceARequest,
+                Texts.LogOut);
 
-            switch (UI.Ask("Choose:"))
+            switch (UI.Ask(Texts.Choose))
             {
-                case "1": UI.ShowRequests(admins.GetPendingRequests()); UI.Pause(); break;
-                case "2": PriceRequest(); UI.Pause(); break;
+                case "1":
+                    UI.ShowRequests(admins.GetPendingRequests());
+                    UI.Pause();
+                    break;
+                case "2":
+                    PriceRequest();
+                    UI.Pause();
+                    break;
                 case "3": return;
-                default: UI.Error("Invalid choice."); break;
+                default: UI.Error(Texts.InvalidChoice); break;
             }
         }
     }
 
     private void PriceRequest()
     {
-        var id = UI.AskNumber("Request id:");
-        var price = decimal.TryParse(UI.Ask("Enter estimated price ($):"), out var parsed) ? parsed : 0;
-        var notes = UI.Ask("Enter technician notes/instructions for the user:");
+        var id = UI.AskNumber(Texts.RequestId);
+        var price = decimal.TryParse(UI.Ask(Texts.EstimatedPrice), out var parsed) ? parsed : 0;
+        var notes = UI.Ask(Texts.TechnicianNotes);
         UI.Report(admins.PriceRequest(id, price, notes),
-            "Request priced.", "Request not found, not pending, or price invalid.");
+            Texts.RequestPriced, Texts.RequestNotFound);
     }
 }

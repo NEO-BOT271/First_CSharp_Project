@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "VgxSnRfTvyo=",
+  "dgSpecHash": "emdwqskj0Q0=",
   "success": true,
   "projectFilePath": "/home/vaxo/RiderProjects/Project_IT_STEP/Project_IT_STEP.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/vaxo/.nuget/packages/microsoft.netcore.app.ref/10.0.14/microsoft.netcore.app.ref.10.0.14.nupkg.sha512",
+    "/home/vaxo/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.14/microsoft.aspnetcore.app.ref.10.0.14.nupkg.sha512",
+    "/home/vaxo/.nuget/packages/microsoft.netcore.app.host.linux-x64/10.0.14/microsoft.netcore.app.host.linux-x64.10.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

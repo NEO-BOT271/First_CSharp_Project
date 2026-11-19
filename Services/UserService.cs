@@ -20,10 +20,9 @@ internal class UserService : IUserService
         requests.Add(request);
         Storage.Save(requests);
 
-        var subject = $"New request #{request.Id}";
         var html = EmailTemplates.RequestReceived(request.Id, userId, QuestionsService.All[request.Category].Title);
-        Email.SendToModerators(subject, html);
-        Email.SendToAdmins(subject, html);
+        Email.SendToModerators(EmailTemplates.RequestSubject(request.Id), html);
+        Email.SendToAdmins(EmailTemplates.RequestSubject(request.Id), html);
         return request; 
     }
 

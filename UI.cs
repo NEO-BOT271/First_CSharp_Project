@@ -1,4 +1,5 @@
 using System.Text;
+using Project_IT_STEP.ENUM;
 using Project_IT_STEP.Models;
 using Project_IT_STEP.Services;
 
@@ -11,16 +12,34 @@ internal static class UI
     public static void Info(string text) => Write(text, ConsoleColor.DarkGray);
     public static void Success(string text) => Notify(text, ConsoleColor.Green);
     public static void Error(string text) => Notify(text, ConsoleColor.Red);
-
+    public static Language CurrentLanguage { get; set; } = Language.English;
     
     private static string? PendingMessage;
     private static ConsoleColor PendingColor;
 
+    
+    public static void Header(params string[] path)
+    {
+        var text = $" {string.Join("  ›  ", path)} ";
+        var width = Math.Max(40, text.Length + 2);
+        var line = new string('═', width);
+
+        Title($"╔{line}╗");
+        Title($"║{text.PadRight(width)}║");
+        Title($"╚{line}╝");
+    }
+    public static (string WorksAt, string Certificate, string Experience) ReadAdminQuestions()
+    {
+        var worksAt = Ask(Texts.WorksAtQuestion);
+        var certificate = Ask(Texts.CertificateQuestion);
+        var experience = Ask(Texts.ExperienceQuestion);
+        return (worksAt, certificate, experience);
+    }
     public static void Pause()
     {
         Console.WriteLine();
         Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write("Press Enter to return to the menu...");
+        Console.Write(Texts.PressEnterToReturn);    
         Console.ResetColor();
         Console.ReadLine();
     }
@@ -41,7 +60,7 @@ internal static class UI
     public static int AskNumber(string question) =>
         int.TryParse(Ask(question), out var number) ? number : 0;
 
-    public static void ShowMenu(string title, params string[] options)
+    public static void ShowMenu(string[] path, params string[] options)
     {
         Console.Clear();
         if (PendingMessage is not null)
@@ -51,7 +70,7 @@ internal static class UI
             Console.ResetColor();
             PendingMessage = null;
         }
-        Title(title);
+        Header(path);
         for (var i = 0; i < options.Length; i++)
         {
             Option($"{i + 1}. {options[i]}");
@@ -74,20 +93,20 @@ internal static class UI
     {
         var request = new CreatingAccountRequest
         {
-            Name = Ask("Name:"),
-            LastName = Ask("Last name:"),
-            Email = Ask("Email:")
+            Name = Ask(Texts.Name),
+            LastName = Ask(Texts.LastName),
+            Email = Ask(Texts.Email)
         };
 
-        Info("Password must be 8 to 15 characters.");
-        request.Password = AskPassword("Password:");
+        Info(Texts.PasswordRule);
+        request.Password = AskPassword(Texts.Password);
         return request;
     }
 
     public static void ShowRequests(List<UserRequest> requests)
     {
         if (requests.Count == 0)
-            Info("No requests.");
+            Info(Texts.NoRequests);
 
         foreach (var request in requests)
         {
@@ -101,7 +120,7 @@ internal static class UI
     public static void ShowList<T>(List<T> items, Func<T, string> describe)
     {
         if (items.Count == 0)
-            Info("Nothing to show.");
+            Info(Texts.NothingToShow);
 
         foreach (var item in items)
             Info(describe(item));

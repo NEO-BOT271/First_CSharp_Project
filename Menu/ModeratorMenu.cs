@@ -1,10 +1,12 @@
 using Project_IT_STEP.ENUM;
 using Project_IT_STEP.Interfaces;
 using Project_IT_STEP.Models;
+using Project_IT_STEP.Services;
+
 namespace Project_IT_STEP.Menu;
 
 internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
-    : RoleMenu<Moderator>(auth, RoleSystem.Moderator, "Moderator")
+    : RoleMenu<Moderator>(auth, RoleSystem.Moderator, Texts.Moderator)
 {
     protected override bool CanSignUp => false;
 
@@ -12,40 +14,40 @@ internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
     {
         while (true)
         {
-            UI.ShowMenu($"=== Moderator: {moderator.Name} ===",
-                "Hire an admin", "List admins", "Remove an admin",
-                "Pending applications", "Review an application", "Log out");
+            UI.ShowMenu([Texts.AppName, Texts.Moderator, moderator.Name],
+                Texts.HireAdmin, Texts.ListAdmin, Texts.RemoveAdmin,
+                Texts.PendingApplication, Texts.ReviewApplication, Texts.LogOut);
 
-            switch (UI.Ask("Choose:"))
+            switch (UI.Ask(Texts.Choose))
             {
                 case "1": UI.Report(moderators.HireAdmin(UI.ReadAccountRequest()),
-                    "Admin hired.", "Invalid details or email already in use."); break;
+                     Texts.AdminHired, Texts.InvalidDetails); break;
                 case "2": UI.ShowList(moderators.GetAdmins(),
                     a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
-                case "3": UI.Report(moderators.RemoveAdmin(UI.AskNumber("Admin id:")),
-                    "Admin removed.", "No admin with that id."); break;
+                case "3": UI.Report(moderators.RemoveAdmin(UI.AskNumber(Texts.AdminId)),
+                    Texts.AdminRemoved, Texts.AdminWithNoId); break;
                 case "4": UI.ShowList(moderators.GetPendingApplications(),
                     a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
                 case "5": ReviewApplication(); UI.Pause(); break;
                 case "6": return;
-                default: UI.Error("Invalid choice."); break;
+                default: UI.Error(Texts.InvalidChoice); break;
             }
         }
     }
 
     private void ReviewApplication()
     {
-        var id = UI.AskNumber("Application id:");
-        var answer = UI.Ask("Approve (y) or reject (n)?").ToLower();
+        var id = UI.AskNumber(Texts.ApplicationId);
+        var answer = UI.Ask(Texts.ApproveReject).ToLower();
         if (answer is not ("y" or "n"))
         {
-            UI.Error("Type y or n.");
+            UI.Error(Texts.ApproveRejectElse);
             return;
         }
 
         var approve = answer == "y";
         UI.Report(moderators.ReviewApplication(id, approve),
-            approve ? "Admin approved and created." : "Application rejected.",
-            "No pending application with that id, or email already registered.");
+            approve ? Texts.AdminApproved : Texts.ApplicationReject,
+            Texts.ApplicationNoPending);
     }
 }

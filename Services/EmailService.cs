@@ -18,7 +18,9 @@ internal class EmailService : IEmailService
         {
             using var message = new MailMessage(Settings.SenderEmail, toEmail, subject, body)
             {
-                IsBodyHtml = true
+                IsBodyHtml = true,
+                SubjectEncoding = System.Text.Encoding.UTF8,
+                BodyEncoding = System.Text.Encoding.UTF8
             };
             using var client = new SmtpClient(Settings.Host, Settings.Port)
             {

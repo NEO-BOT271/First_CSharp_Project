@@ -36,9 +36,8 @@ internal class AdminService : IAdminService
         Storage.Save(requests);
 
         Email.SendToUser(request.UserId,
-            $"Your request #{request.Id} has been priced",
+            EmailTemplates.QuoteSubject(request.Id),
             EmailTemplates.QuotePriced(request.Id, price, notes));
-        return true;
         return true;
     }
 }

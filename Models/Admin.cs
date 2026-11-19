@@ -5,4 +5,7 @@ namespace Project_IT_STEP.Models;
     public class Admin : Person
     {
         public override RoleSystem Role => RoleSystem.Admin;
+        public string WorksAt { get; set; } = "";
+        public string Certificate { get; set; } = "";
+        public string Experience { get; set; } = "";
     }
