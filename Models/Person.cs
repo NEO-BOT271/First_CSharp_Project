@@ -2,7 +2,7 @@ using Project_IT_STEP.ENUM;
 
 namespace Project_IT_STEP.Models;
 
-public abstract class Person
+internal abstract class Person
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";

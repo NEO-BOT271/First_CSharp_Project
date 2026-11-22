@@ -1,6 +1,6 @@
 namespace Project_IT_STEP.Models;
 
-public class CreatingAccountRequest
+internal class CreatingAccountRequest
 {
     public string Name { get; set; } = "";
     public string LastName { get; set; } = "";

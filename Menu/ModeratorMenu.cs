@@ -5,7 +5,7 @@ using Project_IT_STEP.Services;
 
 namespace Project_IT_STEP.Menu;
 
-internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
+internal class ModeratorMenu(IAuthService auth, IModeratorService moderators, IProviderService providers)
     : RoleMenu<Moderator>(auth, RoleSystem.Moderator, Texts.Moderator)
 {
     protected override bool CanSignUp => false;
@@ -16,12 +16,13 @@ internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
         {
             UI.ShowMenu([Texts.AppName, Texts.Moderator, moderator.Name],
                 Texts.HireAdmin, Texts.ListAdmin, Texts.RemoveAdmin,
-                Texts.PendingApplication, Texts.ReviewApplication, Texts.LogOut);
+                Texts.PendingApplication, Texts.ReviewApplication,
+                Texts.AiConfig, Texts.LogOut);
 
             switch (UI.Ask(Texts.Choose))
             {
                 case "1": UI.Report(moderators.HireAdmin(UI.ReadAccountRequest()),
-                     Texts.AdminHired, Texts.InvalidDetails); break;
+                    Texts.AdminHired, Texts.InvalidDetails); break;
                 case "2": UI.ShowList(moderators.GetAdmins(),
                     a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
                 case "3": UI.Report(moderators.RemoveAdmin(UI.AskNumber(Texts.AdminId)),
@@ -29,7 +30,8 @@ internal class ModeratorMenu(IAuthService auth, IModeratorService moderators)
                 case "4": UI.ShowList(moderators.GetPendingApplications(),
                     a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
                 case "5": ReviewApplication(); UI.Pause(); break;
-                case "6": return;
+                case "6": new AiConfigMenu(providers).Run(); break;
+                case "7": return;
                 default: UI.Error(Texts.InvalidChoice); break;
             }
         }

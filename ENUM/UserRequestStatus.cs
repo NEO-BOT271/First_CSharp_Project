@@ -1,6 +1,6 @@
 namespace Project_IT_STEP.ENUM;
 
-public enum UserRequestStatus
+internal enum UserRequestStatus
 {
     Pending,
     Priced,

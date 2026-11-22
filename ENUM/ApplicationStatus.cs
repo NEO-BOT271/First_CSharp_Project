@@ -1,6 +1,6 @@
 namespace Project_IT_STEP.ENUM;
 
-public enum ApplicationStatus
+internal enum ApplicationStatus
 {
     Pending,
     Approved,

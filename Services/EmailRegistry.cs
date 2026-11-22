@@ -2,7 +2,7 @@ using Project_IT_STEP.Models;
 
 namespace Project_IT_STEP.Services;
 
-public class EmailRegistry
+internal class EmailRegistry
 {
     private readonly JsonStorage<User> Users = new("users.json");
     private readonly JsonStorage<Admin> Admins = new("admins.json");

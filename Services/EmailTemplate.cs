@@ -5,27 +5,40 @@ namespace Project_IT_STEP.Services;
 internal static class EmailTemplates
 {
     public const string Layout = """
-        <!DOCTYPE html>
-        <html>
-        <head>
-          <meta charset="UTF-8">
-          <style>
-            body { font-family: Segoe UI, Tahoma, Arial, sans-serif; background: #f4f6fb; color: #333; margin: 0; padding: 20px; }
-            .box { max-width: 480px; margin: auto; background: #fff; padding: 24px; border-radius: 8px; }
-            h2 { color: #4169e1; margin-top: 0; }
-            .footer { font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 12px; }
-          </style>
-        </head>
-        <body>
-          <div class="box">
-            <h2>{{Title}}</h2>
-            {{Body}}
-            <p class="footer">Automated message, please do not reply.</p>
-          </div>
-        </body>
-        </html>
-        """;
-
+                                 <!DOCTYPE html>
+                                 <html>
+                                 <head>
+                                   <meta charset="UTF-8">
+                                   <meta name="viewport" content="width=device-width, initial-scale=1">
+                                 </head>
+                                 <body style="margin:0; padding:0; background:#eef1f7; font-family:Segoe UI, Tahoma, Arial, sans-serif;">
+                                   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#eef1f7; padding:32px 12px;">
+                                     <tr>
+                                       <td align="center">
+                                         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:520px; background:#ffffff; border-radius:12px; overflow:hidden;">
+                                           <tr>
+                                             <td style="background:#1f3b73; padding:20px 28px; color:#ffffff;">
+                                               <div style="font-size:12px; letter-spacing:2px; opacity:0.8;">IT SUPPORT</div>
+                                               <div style="font-size:20px; font-weight:600; margin-top:4px;">{{Title}}</div>
+                                             </td>
+                                           </tr>
+                                           <tr>
+                                             <td style="padding:28px; color:#333333; font-size:15px; line-height:1.6;">
+                                               {{Body}}
+                                             </td>
+                                           </tr>
+                                           <tr>
+                                             <td style="padding:16px 28px; background:#f7f9fc; color:#888888; font-size:12px; border-top:1px solid #e6eaf2;">
+                                               Automated message, please do not reply.
+                                             </td>
+                                           </tr>
+                                         </table>
+                                       </td>
+                                     </tr>
+                                   </table>
+                                 </body>
+                                 </html>
+                                 """;
     public const string ApplicationSubject = "New admin application";
 
     public static string RequestSubject(int requestId) => $"New request #{requestId}";

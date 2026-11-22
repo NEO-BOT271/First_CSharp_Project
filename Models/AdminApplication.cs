@@ -2,7 +2,7 @@ using Project_IT_STEP.ENUM;
 
 namespace Project_IT_STEP.Models;
 
-public class AdminApplication
+internal class AdminApplication
 {
     public int Id { get; set; }
     public string Name { get; set; } = "";

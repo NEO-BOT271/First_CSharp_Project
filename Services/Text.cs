@@ -27,8 +27,8 @@ internal static class Texts
     public static string Email => Pick("ელფოსტა:", "Email:");
     public static string Password => Pick("პაროლი:", "Password:");
     public static string Name => Pick("სახელი:", "Name:");
-    public static string User => Pick("მომხმარებელი:", "User:");
-    public static string Admin => Pick("ადმინისტრატორი:", "Admin:");
+    public static string User => Pick("მომხმარებელი:", "User");
+    public static string Admin => Pick("ადმინისტრატორი:", "Admin");
     public static string AdminId => Pick("ადმინისტრატორის ID:", "Admin id:");
 
     public static string Moderator => Pick("მოდერატორი", "Moderator");
@@ -107,6 +107,9 @@ internal static class Texts
     public static string TechnicianNotes => Pick("მიუთითეთ ტექნიკოსის კომენტარი:",
         "Enter technician notes/instructions for the user:");
 
+    public static string PriceLabel => Pick("ფასი:", "Price:");
+    public static string NotesLabel => Pick("შენიშვნები:", "Notes:");
+
     public static string ApproveReject => Pick("დამტკიცება (y) / უარყოფა (n)?",
         "Approve (y) or reject (n)?");
 
@@ -134,4 +137,31 @@ internal static class Texts
     public static string ExperienceQuestion => Pick(
         "რა IT სფეროებში გაქვთ გამოცდილება? (მაგ., აპარატურა, ქსელი, ოპერაციული სისტემები, მონაცემთა აღდგენა)",
         "What IT areas are you experienced in? (e.g., hardware, networking, operating systems, data recovery)");
+    
+    public static string AiConfig => Pick("AI კონფიგურაცია", "AI Configuration");
+    public static string CheckModels => Pick("მოდელების შემოწმება", "Check models");
+    public static string AddProviderWithKey => Pick("პროვაიდერის დამატება API გასაღებით", "Add provider with API key");
+    public static string AddProviderWithoutKey => Pick("პროვაიდერის დამატება API გასაღების გარეშე", "Add provider without API key");
+    public static string ProviderName => Pick("პროვაიდერის სახელი:", "Provider name:");
+    public static string ProviderUrl => Pick("URL:", "URL:");
+    public static string ProviderApiKey => Pick("API გასაღები:", "API key:");
+    public static string ProviderAdded => Pick("პროვაიდერი დამატებულია.", "Provider added.");
+    public static string ProviderFailed => Pick("პროვაიდერი ვერ დაემატა (სახელი ან URL არასწორია, ან სახელი უკვე არსებობს).", "Provider not added (invalid name or URL, or name already exists).");
+    public static string ProviderTypeQuestion => Pick("ტიპი (1 - Gemini, 2 - OpenAI-compatible):", "Type (1 - Gemini, 2 - OpenAI-compatible):");
+    public static string NoProviders => Pick("პროვაიდერები არ არის დამატებული.", "No providers added.");
+    public static string DeleteProvider => Pick("პროვაიდერის წაშლა", "Delete provider");
+    public static string ProviderId => Pick("პროვაიდერის ID:", "Provider id:");
+    public static string ProviderDeleted => Pick("პროვაიდერი წაიშალა.", "Provider deleted.");
+    public static string ProviderNotFound => Pick("ამ ID-ით პროვაიდერი ვერ მოიძებნა.", "No provider with that id.");
+    public static string ChooseModel => Pick("მოდელის არჩევა", "Choose model");
+    public static string ChooseActiveProvider => Pick("აქტიური პროვაიდერის არჩევა", "Choose active provider");
+    public static string NoModels => Pick("მოდელები ვერ მოიძებნა. შეამოწმეთ URL და API გასაღები.", "No models found. Check the URL and API key.");
+    public static string ChooseModelNumber => Pick("აირჩიე მოდელის ნომერი:", "Choose model number:");
+    public static string ModelSet => Pick("მოდელი დაყენდა.", "Model set.");
+    public static string ActiveSet => Pick("აქტიური პროვაიდერი დაყენდა.", "Active provider set.");
+    public static string ProviderIsLocal => Pick("ეს პროვაიდერი ლოკალურია? (y/n):", "Is this provider local? (y/n):");
+    public static string DescribeProblem => Pick("აღწერეთ თქვენი პრობლემა ერთ წინადადებად:", "Describe your problem in one sentence:");
+    public static string SuggestedService => Pick("შემოთავაზებული სერვისი:", "Suggested service:");
+    public static string UseThis => Pick("გამოვიყენო? (y/n):", "Use this? (y/n):");
+    
 }

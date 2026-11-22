@@ -1,6 +1,6 @@
 namespace Project_IT_STEP.ENUM;
 
-public enum ServiceCategory
+internal enum ServiceCategory
 {
     EquipmentRepair = 1,
     WifiAndNetwork,

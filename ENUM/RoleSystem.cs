@@ -1,6 +1,6 @@
 namespace Project_IT_STEP.ENUM;
 
-public enum RoleSystem
+internal enum RoleSystem
 {
     User,
     Admin,

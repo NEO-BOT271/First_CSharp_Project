@@ -110,10 +110,10 @@ internal static class UI
 
         foreach (var request in requests)
         {
-            Title($"#{request.Id} {QuestionsService.All[request.Category].Title} - {request.Status}");
+            Title($"#{request.Id} {QuestionsService.All[request.Category].Title} - {Texts.StatusName(request.Status)}");
             Info(request.Details);
             if (request.Price is not null)
-                Info($"Price: ${request.Price}   Notes: {request.TechnicianNotes}");
+                Info($"{Texts.PriceLabel} ${request.Price}   {Texts.NotesLabel} {request.TechnicianNotes}");
         }
     }
 

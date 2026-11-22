@@ -5,7 +5,7 @@ using Project_IT_STEP.Services;
 
 namespace Project_IT_STEP.Menu;
 
-internal class UserMenu(IAuthService auth, IUserService users)
+internal class UserMenu(IAuthService auth, IUserService users, IAiService ai)
     : RoleMenu<User>(auth, RoleSystem.User, Texts.UserMenu)
 {
     protected override void SignUp() =>
@@ -33,7 +33,7 @@ internal class UserMenu(IAuthService auth, IUserService users)
 
     private void SubmitRequest(User user)
     {
-        var category = ChooseCategory();
+        var category = SuggestFromAi() ?? ChooseCategory();
         if (category is null)
         {
             UI.Error(Texts.InvalidService);
@@ -50,7 +50,9 @@ internal class UserMenu(IAuthService auth, IUserService users)
 
         var details = string.Join(Environment.NewLine, questions.Zip(answers, (q, a) => $"{q} {a}"));
         var request = users.SubmitRequest(user.Id, new UserRequest { Category = category.Value, Details = details });
-        UI.Success($"{Texts.Request} #{request.Id} {Texts.Sent}. {Texts.Status} {Texts.StatusName(request.Status)}");    }
+        UI.Success($"{Texts.Request} #{request.Id} {Texts.Sent}. {Texts.Status} {Texts.StatusName(request.Status)}");
+        
+    }
 
     private static ServiceCategory? ChooseCategory()
     {
@@ -59,6 +61,21 @@ internal class UserMenu(IAuthService auth, IUserService users)
 
         return int.TryParse(UI.Ask(Texts.ChooseService), out var number) && Enum.IsDefined((ServiceCategory)number)
             ? (ServiceCategory)number
+            : null;
+    }
+    
+    private ServiceCategory? SuggestFromAi()
+    {
+        var problem = UI.Ask(Texts.DescribeProblem);
+        if (string.IsNullOrWhiteSpace(problem))
+            return null;
+
+        var suggestion = ai.SuggestCategory(problem);
+        if (suggestion is null)
+            return null;
+
+        return UI.Ask($"{Texts.SuggestedService} {(int)suggestion}. {QuestionsService.All[suggestion.Value].Title}. {Texts.UseThis}").ToLower() == "y"
+            ? suggestion
             : null;
     }
 }
