@@ -41,7 +41,8 @@ internal class AiService(IProviderService providers) : IAiService
         HttpRequestMessage request;
         if (provider.Type == ProviderType.Gemini)
         {
-            var url = $"https://generativelanguage.googleapis.com/v1beta/models/{provider.Model}:generateContent?key={provider.ApiKey}";
+            var url =
+                $"https://generativelanguage.googleapis.com/v1beta/models/{provider.Model}:generateContent?key={provider.ApiKey}";
             var body = new { contents = new[] { new { parts = new[] { new { text = prompt } } } } };
             request = new HttpRequestMessage(HttpMethod.Post, url)
             {
@@ -67,7 +68,53 @@ internal class AiService(IProviderService providers) : IAiService
         using var json = JsonDocument.Parse(response.Content.ReadAsStream());
         var root = json.RootElement;
         return provider.Type == ProviderType.Gemini
-            ? root.GetProperty("candidates")[0].GetProperty("content").GetProperty("parts")[0].GetProperty("text").GetString() ?? ""
+            ? root.GetProperty("candidates")[0].GetProperty("content").GetProperty("parts")[0].GetProperty("text")
+                .GetString() ?? ""
             : root.GetProperty("choices")[0].GetProperty("message").GetProperty("content").GetString() ?? "";
+    }
+
+    private static readonly string[] Topics =
+    [
+        "where they work or worked before",
+        "whether they have a certificate (free text)",
+        "which IT areas they have experience in"
+    ];
+
+    public string? NextQuestion(List<string> answers)
+    {
+        var provider = providers.GetActive();
+        if (provider is null || string.IsNullOrWhiteSpace(provider.Model) || answers.Count >= Topics.Length)
+            return null;
+
+        var prompt = $"You are interviewing a candidate for an IT support admin job. " +
+                     $"Ask one short question about: {Topics[answers.Count]}. Reply with only the question.";
+        try
+        {
+            var reply = Send(provider, prompt).Trim();
+            return reply.Length > 0 ? reply : null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
+    }
+
+    public string? Summarize(List<string> answers)
+    {
+        var provider = providers.GetActive();
+        if (provider is null || string.IsNullOrWhiteSpace(provider.Model))
+            return null;
+
+        var prompt = "Summarize this IT admin candidate in two short lines for a moderator. " +
+                     "Use only the facts given.\n" + string.Join("\n", answers);
+        try
+        {
+            var reply = Send(provider, prompt).Trim();
+            return reply.Length > 0 ? reply : null;
+        }
+        catch (Exception)
+        {
+            return null;
+        }
     }
 }

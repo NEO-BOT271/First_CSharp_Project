@@ -163,5 +163,8 @@ internal static class Texts
     public static string DescribeProblem => Pick("აღწერეთ თქვენი პრობლემა ერთ წინადადებად:", "Describe your problem in one sentence:");
     public static string SuggestedService => Pick("შემოთავაზებული სერვისი:", "Suggested service:");
     public static string UseThis => Pick("გამოვიყენო? (y/n):", "Use this? (y/n):");
+    public static string WorksAtLabel => Pick("მუშაობს:", "Works at:");
+    public static string CertificateLabel => Pick("სერტიფიკატი:", "Certificate:");
+    public static string ExperienceLabel => Pick("გამოცდილება (AI შეჯამება):", "Experience (AI summary):");
     
 }

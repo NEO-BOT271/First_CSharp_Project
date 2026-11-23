@@ -18,11 +18,12 @@ void ChooseLanguage()
 
 var auth = new AuthService();
 var moderators = new ModeratorService();
-var adminMenu = new AdminMenu(auth, new AdminService(), moderators);
 var providers = new ProviderService();
 var ai = new AiService(providers);
+
 var userMenu = new UserMenu(auth, new UserService(), ai);
-var moderatorMenu = new ModeratorMenu(auth, moderators, providers);
+var adminMenu = new AdminMenu(auth, new AdminService(), moderators, ai);
+var moderatorMenu = new ModeratorMenu(auth, moderators, providers);;
 while (true)
 {
     UI.ShowMenu([Texts.AppName],

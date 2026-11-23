@@ -1,24 +1,2 @@
 [
-  {
-    "Id": 1,
-    "Name": "vaxoadmin",
-    "LastName": "das",
-    "Email": "asfka@gmail.com",
-    "PasswordHash": "ED7CE2543FEEEE8020F50A7F3415D1C4880C4BE39CE0774D59C7DA160607EB99",
-    "WorksAt": "",
-    "Certificate": "",
-    "Experience": "",
-    "Status": 0
-  },
-  {
-    "Id": 2,
-    "Name": "vaxoadmini",
-    "LastName": "adminivar",
-    "Email": "digitalneonix@gmail.com",
-    "PasswordHash": "ED7CE2543FEEEE8020F50A7F3415D1C4880C4BE39CE0774D59C7DA160607EB99",
-    "WorksAt": "It Stepshi vmushaobdi",
-    "Certificate": "diax certiport html5",
-    "Experience": "aparatura qselebi operaciuli sistemebi",
-    "Status": 0
-  }
 ]

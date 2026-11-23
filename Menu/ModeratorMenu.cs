@@ -28,7 +28,10 @@ internal class ModeratorMenu(IAuthService auth, IModeratorService moderators, IP
                 case "3": UI.Report(moderators.RemoveAdmin(UI.AskNumber(Texts.AdminId)),
                     Texts.AdminRemoved, Texts.AdminWithNoId); break;
                 case "4": UI.ShowList(moderators.GetPendingApplications(),
-                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}"); UI.Pause(); break;
+                    a => $"#{a.Id} {a.Name} {a.LastName} - {a.Email}\n" +
+                         $"    {Texts.WorksAtLabel} {a.WorksAt}\n" +
+                         $"    {Texts.CertificateLabel} {a.Certificate}\n" +
+                         $"    {Texts.ExperienceLabel} {a.Experience}"); UI.Pause(); break;
                 case "5": ReviewApplication(); UI.Pause(); break;
                 case "6": new AiConfigMenu(providers).Run(); break;
                 case "7": return;

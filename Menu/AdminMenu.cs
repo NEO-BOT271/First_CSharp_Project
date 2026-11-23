@@ -5,17 +5,22 @@ using Project_IT_STEP.Services;
 
 namespace Project_IT_STEP.Menu;
 
-internal class AdminMenu(IAuthService auth, IAdminService admins, IModeratorService moderators)
+internal class AdminMenu(IAuthService auth, IAdminService admins, IModeratorService moderators, IAiService ai)
     : RoleMenu<Admin>(auth, RoleSystem.Admin, Texts.AdminMenu)
 {
-  
     protected override void SignUp()
     {
         var request = UI.ReadAccountRequest();
-        var (worksAt, certificate, experience) = UI.ReadAdminQuestions();
-        UI.Report(moderators.SubmitApplication(request, worksAt, certificate, experience),
-            Texts.ApplicationSent,
-            Texts.InvalidDetailsAdmin);
+        var answers = AskCandidate();
+        if (answers is null)
+        {
+            UI.Error(Texts.InvalidDetailsAdmin);
+            return;
+        }
+
+        var summary = ai.Summarize(answers) ?? string.Join(" | ", answers);
+        UI.Report(moderators.SubmitApplication(request, answers[0], answers[1], summary),
+            Texts.ApplicationSent, Texts.InvalidDetailsAdmin);
     }
 
     protected override void Open(Admin admin)
@@ -42,6 +47,28 @@ internal class AdminMenu(IAuthService auth, IAdminService admins, IModeratorServ
             }
         }
     }
+
+    private List<string>? AskCandidate()
+    {
+        var answers = new List<string>();
+        for (var i = 0; i < 3; i++)
+        {
+            var question = ai.NextQuestion(answers) ?? FixedQuestion(i);
+            var answer = UI.Ask(question);
+            if (string.IsNullOrWhiteSpace(answer))
+                return null;
+            answers.Add(answer);
+        }
+
+        return answers;
+    }
+
+    private static string FixedQuestion(int index) => index switch
+    {
+        0 => Texts.WorksAtQuestion,
+        1 => Texts.CertificateQuestion,
+        _ => Texts.ExperienceQuestion
+    };
 
     private void PriceRequest()
     {

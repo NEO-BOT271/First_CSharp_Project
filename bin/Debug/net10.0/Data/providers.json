@@ -6,7 +6,7 @@
     "Url": "https://generativelanguage.googleapis.com",
     "ApiKey": "",
     "IsLocal": false,
-    "Model": "gemini-2.5-flash",
+    "Model": "gemini-3.1-flash-lite-preview",
     "IsActive": false
   },
   {
@@ -17,6 +17,16 @@
     "ApiKey": "",
     "IsLocal": true,
     "Model": "hf.co/purdue-ie336/qwen2.5-3b-instruct-GGUF:Q4_K_M",
+    "IsActive": false
+  },
+  {
+    "Id": 3,
+    "Name": "OpenRouter",
+    "Type": 1,
+    "Url": "https://openrouter.ai/api",
+    "ApiKey": "",
+    "IsLocal": false,
+    "Model": "openrouter/free",
     "IsActive": true
   }
 ]

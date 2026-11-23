@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/vaxo/RiderProjects/testing/Project_IT_STEP/Project_IT_STEP.csproj",
+      "projectUniqueName": "/home/vaxo/RiderProjects/Project_IT_STEP/Project_IT_STEP.csproj",
       "projectName": "Project_IT_STEP",
-      "projectPath": "/home/vaxo/RiderProjects/testing/Project_IT_STEP/Project_IT_STEP.csproj",
+      "projectPath": "/home/vaxo/RiderProjects/Project_IT_STEP/Project_IT_STEP.csproj",
       "packagesPath": "/home/vaxo/.nuget/packages/",
-      "outputPath": "/home/vaxo/RiderProjects/testing/Project_IT_STEP/obj/",
+      "outputPath": "/home/vaxo/RiderProjects/Project_IT_STEP/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/vaxo/.nuget/NuGet/NuGet.Config"
