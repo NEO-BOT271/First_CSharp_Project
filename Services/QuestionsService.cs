@@ -4,7 +4,7 @@ namespace Project_IT_STEP.Services;
 
 internal static class QuestionsService
 {
-    public static readonly Dictionary<ServiceCategory, (string Title, string[] Questions)> All = new()
+    public static Dictionary<ServiceCategory, (string Title, string[] Questions)> All => new()
     {
         [ServiceCategory.EquipmentRepair] = (
             Texts.Pick("მოწყობილობის შეკეთება", "Equipment Repair"),

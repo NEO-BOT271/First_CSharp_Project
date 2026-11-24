@@ -13,8 +13,6 @@
 /home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.pdb
 /home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_IT_STEP.genruntimeconfig.cache
 /home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/ref/Project_IT_STEP.dll
-/home/vaxo/RiderProjects/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.runtimeconfig.dev.json
-/home/vaxo/RiderProjects/Project_IT_STEP/obj/Debug/net10.0/Project_.522BF47F.Up2Date
 /home/vaxo/RiderProjects/testing/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP
 /home/vaxo/RiderProjects/testing/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.deps.json
 /home/vaxo/RiderProjects/testing/Project_IT_STEP/bin/Debug/net10.0/Project_IT_STEP.runtimeconfig.json

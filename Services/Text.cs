@@ -27,8 +27,8 @@ internal static class Texts
     public static string Email => Pick("ელფოსტა:", "Email:");
     public static string Password => Pick("პაროლი:", "Password:");
     public static string Name => Pick("სახელი:", "Name:");
-    public static string User => Pick("მომხმარებელი:", "User");
-    public static string Admin => Pick("ადმინისტრატორი:", "Admin");
+    public static string User => Pick("მომხმარებელი", "User");
+    public static string Admin => Pick("ადმინისტრატორი", "Admin");
     public static string AdminId => Pick("ადმინისტრატორის ID:", "Admin id:");
 
     public static string Moderator => Pick("მოდერატორი", "Moderator");

@@ -1,16 +1,6 @@
 [
   {
     "Id": 1,
-    "Name": "Google",
-    "Type": 0,
-    "Url": "https://generativelanguage.googleapis.com",
-    "ApiKey": "",
-    "IsLocal": false,
-    "Model": "gemini-3.1-flash-lite-preview",
-    "IsActive": false
-  },
-  {
-    "Id": 2,
     "Name": "Ollama",
     "Type": 1,
     "Url": "http://localhost:11434",
@@ -20,8 +10,8 @@
     "IsActive": false
   },
   {
-    "Id": 3,
-    "Name": "OpenRouter",
+    "Id": 2,
+    "Name": "Openrouter",
     "Type": 1,
     "Url": "https://openrouter.ai/api",
     "ApiKey": "",
