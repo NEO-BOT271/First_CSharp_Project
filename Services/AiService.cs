@@ -86,8 +86,9 @@ internal class AiService(IProviderService providers) : IAiService
         if (provider is null || string.IsNullOrWhiteSpace(provider.Model) || answers.Count >= Topics.Length)
             return null;
 
+        var language = UI.CurrentLanguage == Language.Georgian ? "Georgian" : "English";
         var prompt = $"You are interviewing a candidate for an IT support admin job. " +
-                     $"Ask one short question about: {Topics[answers.Count]}. Reply with only the question.";
+                     $"Ask one short question in {language} about: {Topics[answers.Count]}. Reply with only the question.";
         try
         {
             var reply = Send(provider, prompt).Trim();

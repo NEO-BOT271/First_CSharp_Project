@@ -33,8 +33,8 @@ internal static class Texts
 
     public static string Moderator => Pick("მოდერატორი", "Moderator");
 
-    public static string UserMenu => Pick("მომხმარებელის მენიუ:", "User Menu");
-    public static string AdminMenu => Pick("ადმინისტრატორის მენიუ:", "Admin Menu");
+    public static string UserMenu => Pick("მომხმარებელის მენიუ", "User Menu");
+    public static string AdminMenu => Pick("ადმინისტრატორის მენიუ", "Admin Menu");
     public static string HireAdmin => Pick("ადმინისტრატორის დამატება", "Hire an admin");
     public static string ListAdmin => Pick("ადმინისტრატორების სია", "List admins");
     public static string RemoveAdmin => Pick("ადმინისტრატორის წაშლა", "Remove an admin");
